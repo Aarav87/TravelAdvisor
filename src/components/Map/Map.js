@@ -1,29 +1,33 @@
-import GoogleMap from "google-map-react";
-import useStyles from "./styles.js"
+import {GoogleMap, useLoadScript} from "@react-google-maps/api";
+import { useMemo } from "react";
 
-const Map = () => {
-    const coordinates = { lat: 0, lng: 0 };
-    const { classes } = useStyles();
-    // Map options
-    const options = {
+function Map() {
+    // Load api key
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    });
+    // Center coordinates of the map
+    const center = useMemo(() => ({ lat: 43, lng: -79 }), []);
+    // Map options and theme
+    const options = useMemo(() => ({
         disableDefaultUI: true,
         clickableIcons: false,
         mapId: "14b7d8385338d844"
-    }
+    }), []);
+
+    // Display loading screen if api key has not loaded
+    if (!isLoaded) return <div>Loading...</div>;
 
     return (
-        <div className={classes.mapContainer}>
+        <div className="map-container">
             <GoogleMap
+                zoom={10}
+                center={center}
                 options={options}
-                bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
-                defaultCenter={coordinates}
-                center={coordinates}
-                defaultZoom={14}
-                margin={[50, 50, 50, 50]}
-            >
+                mapContainerClassName="map">
             </GoogleMap>
         </div>
     );
 }
 
-export default Map
+export default Map;
