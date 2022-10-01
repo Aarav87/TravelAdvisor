@@ -1,9 +1,44 @@
-.map {
-    width: 100%;
-    height: 100vh;
+/* APP */
+.app {
+    height: 97vh;
+    width: 98vw;
+    margin: 0;
+}
+
+.places-list {
+    width: 39%;
+    height: 100%;
+    float: left;
+    margin-right: 1%;
 }
 
 .map-container {
-    width: 80%;
-    height: 100vh;
+    width: 60%;
+    height: 100%;
+    float: right;
+}
+
+
+/* SEARCH BAR */
+.search-bar {
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: black;
+}
+
+.input-box {
+    margin-left: 1px;
+    flex: 1px;
+}
+
+.search-icon {
+    color: black;
+}
+
+/* MAP */
+.map {
+    width: 100%;
+    height: 98vh;
 }
