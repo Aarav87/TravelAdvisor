@@ -1,9 +1,7 @@
-import { GoogleMap   } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import { useMemo } from "react";
 
-function Map() {
-    // Center coordinates of the map
-    const center = useMemo(() => ({ lat: 43, lng: -79 }), []);
+const Map = ({ coordinates }) => {
     // Map options and theme
     const options = useMemo(() => ({
         disableDefaultUI: true,
@@ -14,7 +12,7 @@ function Map() {
     return (
         <GoogleMap
             zoom={10}
-            center={center}
+            center={coordinates}
             options={options}
             mapContainerClassName="map">
         </GoogleMap>
