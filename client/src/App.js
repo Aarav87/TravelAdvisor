@@ -4,8 +4,8 @@ import SearchBar from "./components/SearchBar";
 import { useLoadScript } from "@react-google-maps/api";
 
 const App = () => {
-    const libs = useMemo(() => (["places"]), [])
-    const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 })
+    const libs = useMemo(() => (["places"]), []);
+    const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
 
     // Load api key
     const { isLoaded } = useLoadScript({
@@ -18,7 +18,7 @@ const App = () => {
         navigator.geolocation.getCurrentPosition(({ coords}) => {
             setCoordinates({ lat: coords["latitude"], lng: coords["longitude"] })
         })
-    }, [])
+    }, []);
 
     // Display loading screen if api key has not loaded
     if (!isLoaded) return <div>Loading...</div>;
