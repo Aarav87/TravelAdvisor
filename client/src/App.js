@@ -1,11 +1,15 @@
 import {useEffect, useMemo, useState} from "react";
 import Map from "./components/Map";
 import SearchBar from "./components/SearchBar";
-import { useLoadScript } from "@react-google-maps/api";
+import {useLoadScript} from "@react-google-maps/api";
+import axios from "axios";
 
 const App = () => {
     const libs = useMemo(() => (["places"]), []);
+    const [mapRef, setMapRef] = useState(null);
     const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+    const [bounds, setBounds] = useState(null);
+    const [places, setPlaces] = useState([]);
 
     // Load api key
     const { isLoaded } = useLoadScript({
@@ -20,16 +24,50 @@ const App = () => {
         })
     }, []);
 
+    useEffect(() => {
+        if (!bounds) return;
+        axios
+            .post(process.env.REACT_APP_SERVER_URL, bounds)
+            .then((data) => {
+                setPlaces(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [bounds, coordinates]);
+
+    const handleOnCenterChanged = () => {
+        if (!mapRef) return;
+        const center = mapRef.getCenter();
+        setCoordinates({ lat: center.lat(), lng: center.lng() });
+    };
+
+    const handleOnBoundsChanged = () => {
+        if (!mapRef) return;
+        const bounds = mapRef.getBounds();
+        const northEast = bounds.getNorthEast();
+        const southWest = bounds.getSouthWest();
+        setBounds({ ne: [northEast.lat(), northEast.lng()],  sw: [southWest.lat(), southWest.lng()] });
+    };
+
     // Display loading screen if api key has not loaded
     if (!isLoaded) return <div>Loading...</div>;
 
     return (
         <div className="app">
             <div className="places-list">
-                <SearchBar setCoordinates={setCoordinates}/>
+                <SearchBar
+                    setCoordinates={setCoordinates}
+                    onBoundsChanged={handleOnBoundsChanged}
+                />
             </div>
             <div className="map-container">
-                <Map coordinates={coordinates}/>
+                <Map
+                    setMapRef={setMapRef}
+                    coordinates={coordinates}
+                    onCenterChanged={handleOnCenterChanged}
+                    onBoundsChanged={handleOnBoundsChanged}
+                />
             </div>
         </div>
     );
