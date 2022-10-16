@@ -21,11 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const apiKey = process.env.RAPID_API_KEY;
-const apiURL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary"
 
 app.post("/", (req, res) => {
     const bounds = req.body;
-
+    const apiURL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary"
     const options = {
         method: "GET",
         url: apiURL,

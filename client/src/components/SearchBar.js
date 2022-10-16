@@ -13,7 +13,6 @@ const SearchBar = ({ setCoordinates, onBoundsChanged }) => {
 
         setCoordinates({ lat, lng });
         onBoundsChanged();
-
     }
 
     return (

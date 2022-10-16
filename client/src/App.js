@@ -1,7 +1,8 @@
-import {useEffect, useMemo, useState} from "react";
+import { useEffect, useMemo, useState } from "react";
 import Map from "./components/Map";
 import SearchBar from "./components/SearchBar";
-import {useLoadScript} from "@react-google-maps/api";
+import Filter from "./components/Filter";
+import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
     const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
     const [bounds, setBounds] = useState(null);
     const [places, setPlaces] = useState([]);
+    const [filter, setFilter] = useState("attractions");
 
     // Load api key
     const { isLoaded } = useLoadScript({
@@ -55,10 +57,14 @@ const App = () => {
 
     return (
         <div className="app">
-            <div className="places-list">
+            <div className="header">
                 <SearchBar
                     setCoordinates={setCoordinates}
                     onBoundsChanged={handleOnBoundsChanged}
+                />
+                <Filter
+                    filter={filter}
+                    setFilter={setFilter}
                 />
             </div>
             <div className="map-container">
