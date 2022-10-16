@@ -22,9 +22,15 @@ app.use(express.urlencoded({ extended: false }));
 
 const apiKey = process.env.RAPID_API_KEY;
 
+// Use bounds and type filter to retrieve places from API
 app.post("/", (req, res) => {
-    const bounds = req.body;
-    const apiURL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary"
+    // Recieve data from frontend
+    const data = req.body;
+    const bounds = data["bounds"];
+    const type = data["type"];
+
+    // Set API request options
+    const apiURL = `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`
     const options = {
         method: "GET",
         url: apiURL,
@@ -40,6 +46,7 @@ app.post("/", (req, res) => {
         }
     }
 
+    // Make API request and send response to frontend
     axios.request(options).then((response) => {
         res.send(response["data"]["data"])
     }).catch((error) => {

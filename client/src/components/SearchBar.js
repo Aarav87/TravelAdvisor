@@ -7,6 +7,8 @@ import { useState } from "react";
 const SearchBar = ({ setCoordinates, onBoundsChanged }) => {
     const [autocomplete, setAutocomplete] = useState(null);
     const onLoad = (autoC) => setAutocomplete(autoC);
+
+    // Update bounds and center coordinates
     const onPlaceChanged = () => {
         const lat = autocomplete.getPlace().geometry.location.lat();
         const lng = autocomplete.getPlace().geometry.location.lng();

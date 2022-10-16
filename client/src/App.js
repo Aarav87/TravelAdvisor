@@ -11,7 +11,8 @@ const App = () => {
     const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
     const [bounds, setBounds] = useState(null);
     const [places, setPlaces] = useState([]);
-    const [filter, setFilter] = useState("attractions");
+    const [type, setType] = useState("attractions");
+    const [rating, setRating] = useState("");
 
     // Load api key
     const { isLoaded } = useLoadScript({
@@ -26,24 +27,30 @@ const App = () => {
         })
     }, []);
 
+    // Send bounds to server and retrieve places data
     useEffect(() => {
         if (!bounds) return;
         axios
-            .post(process.env.REACT_APP_SERVER_URL, bounds)
+            .post(process.env.REACT_APP_SERVER_URL, {
+                bounds,
+                type
+            })
             .then((data) => {
-                setPlaces(data)
+                setPlaces(data["data"].filter((place) => place.name && place.num_reviews > 0));
             })
             .catch(err => {
                 console.log(err)
             })
-    }, [bounds, coordinates]);
+    }, [bounds, type]);
 
+    // Update center coordinates
     const handleOnCenterChanged = () => {
         if (!mapRef) return;
         const center = mapRef.getCenter();
         setCoordinates({ lat: center.lat(), lng: center.lng() });
     };
 
+    // Update bounds
     const handleOnBoundsChanged = () => {
         if (!mapRef) return;
         const bounds = mapRef.getBounds();
@@ -63,8 +70,10 @@ const App = () => {
                     onBoundsChanged={handleOnBoundsChanged}
                 />
                 <Filter
-                    filter={filter}
-                    setFilter={setFilter}
+                    type={type}
+                    setType={setType}
+                    rating={rating}
+                    setRating={setRating}
                 />
             </div>
             <div className="map-container">

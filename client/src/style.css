@@ -44,7 +44,19 @@
 }
 
 /* FILTER */
+.filter-container {
+    width: 90%;
+    padding-top: 2%;
+}
+
+.type-filter {
+    width: 45%;
+}
+
+.rating-filter {
+    width: 45%;
+}
+
 .choices {
-    height: 35px;
-    margin-top: 5px;
+    height: 30px;
 }

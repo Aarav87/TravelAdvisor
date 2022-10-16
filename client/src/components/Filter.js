@@ -1,20 +1,23 @@
-import { FormControl, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const Filter = ({ filter, setFilter }) => {
+const Filter = ({ type, setType }) => {
     return (
-        <FormControl className="filter">
-            <Select
-                className="choices"
-                value={filter}
-                onChange={(event) => {
-                    setFilter(event.target.value)
-                }}
-            >
-                <MenuItem value="restaurants">Restaurants</MenuItem>
-                <MenuItem value="attractions">Attractions</MenuItem>
-                <MenuItem value="hotels">Hotels</MenuItem>
-            </Select>
-        </FormControl>
+        <div className="filter-container">
+            <FormControl className="type-filter">
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                    className="choices"
+                    value={type}
+                    onChange={(event) => {
+                        setType(event.target.value)
+                    }}
+                >
+                    <MenuItem value="restaurants">Restaurants</MenuItem>
+                    <MenuItem value="attractions">Attractions</MenuItem>
+                    <MenuItem value="hotels">Hotels</MenuItem>
+                </Select>
+            </FormControl>
+        </div>
     );
 };
 
