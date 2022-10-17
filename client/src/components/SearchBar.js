@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import { Autocomplete } from "@react-google-maps/api"
 import { useState } from "react";
 
-const SearchBar = ({ setCoordinates, onBoundsChanged }) => {
+const SearchBar = ({ setCoordinates }) => {
     const [autocomplete, setAutocomplete] = useState(null);
     const onLoad = (autoC) => setAutocomplete(autoC);
 
@@ -14,7 +14,6 @@ const SearchBar = ({ setCoordinates, onBoundsChanged }) => {
         const lng = autocomplete.getPlace().geometry.location.lng();
 
         setCoordinates({ lat, lng });
-        onBoundsChanged();
     }
 
     return (

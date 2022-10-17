@@ -21,13 +21,8 @@ const Map = ({ coordinates, onCenterChanged, onBoundsChanged, setMapRef }) => {
             options={options}
             mapContainerClassName="map"
             onLoad={(map) => {handleOnLoad(map)}}
-            onDragEnd={() => {
-                onCenterChanged();
-                onBoundsChanged();
-            }}
-            onZoomChanged={onBoundsChanged}
+            onBoundsChanged={onBoundsChanged}
         >
-
         </GoogleMap>
     );
 }

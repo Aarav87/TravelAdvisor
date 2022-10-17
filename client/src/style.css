@@ -3,6 +3,7 @@
     height: 97vh;
     width: 98vw;
     margin: 0;
+    overflow: hidden;
 }
 
 .header {
@@ -12,12 +13,24 @@
     margin-right: 1%;
 }
 
+.places-list {
+    height: 100%;
+    margin-top: 10px;
+    overflow: auto;
+}
+
 .map-container {
     width: 60%;
     height: 100%;
     float: right;
+    overflow: hidden;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* SEARCH BAR */
 .search-bar {
@@ -53,10 +66,28 @@
     width: 45%;
 }
 
-.rating-filter {
-    width: 45%;
-}
-
 .choices {
     height: 30px;
+}
+
+/* PLACE INFO */
+.place-card {
+    font-family: Tahoma, sans-serif;
+}
+
+.chip {
+    margin: 5px 5px 5px 0;
+}
+
+.address {
+    align-items: center;
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.phone {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
