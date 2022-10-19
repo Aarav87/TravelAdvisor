@@ -56,6 +56,28 @@
     height: 98vh;
 }
 
+.marker-container {
+    z-index: 1;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.marker-container:hover {
+    z-index: 2;
+}
+
+.place-preview {
+    width: 100px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.image {
+    cursor: pointer;
+}
+
 /* FILTER */
 .filter-container {
     width: 90%;

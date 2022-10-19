@@ -105,6 +105,7 @@ const App = () => {
                     coordinates={coordinates}
                     // onCenterChanged={handleOnCenterChanged}
                     onBoundsChanged={handleOnBoundsChanged}
+                    places={places}
                 />
             </div>
         </div>

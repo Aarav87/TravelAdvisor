@@ -1,4 +1,4 @@
-import {Box, Button, Card, CardContent, CardMedia, CardActions, Chip, Typography} from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, CardActions, Chip, Typography, Rating } from "@mui/material";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 
@@ -7,11 +7,15 @@ const PlaceInfo = ({ place }) => {
         <Card elevation={20} className="place-card">
             <CardMedia
                 style={{ height: 350 }}
-                image={place.photo ? place.photo.images.large.url : "'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'"}
+                image={place.photo ? place.photo.images.large.url : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"}
                 title={place.name}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5">{place.name}</Typography>
+                <Box display="flex" justifyContent="space-between">
+                    <Rating value={Number(place.rating)} readOnly />
+                    <Typography variant="subtitle1">out of {place.num_reviews}</Typography>
+                </Box>
                 <Box display="flex" justifyContent="space-between">
                     <Typography variant="subtitle1">Price</Typography>
                     <Typography gutterBottom variant="subtitle1">{place.price?.level}</Typography>
