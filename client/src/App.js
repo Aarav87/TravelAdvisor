@@ -49,13 +49,6 @@ const App = () => {
             })
     }, [bounds, type]);
 
-    // // Update center coordinates
-    // const handleOnCenterChanged = () => {
-    //     if (!mapRef) return;
-    //     const center = mapRef.getCenter();
-    //     setCoordinates({ lat: center.lat(), lng: center.lng() });
-    // };
-
     // Update bounds
     const handleOnBoundsChanged = () => {
         if (!mapRef) return;
@@ -103,7 +96,6 @@ const App = () => {
                 <Map
                     setMapRef={setMapRef}
                     coordinates={coordinates}
-                    // onCenterChanged={handleOnCenterChanged}
                     onBoundsChanged={handleOnBoundsChanged}
                     places={places}
                 />

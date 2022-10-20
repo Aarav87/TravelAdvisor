@@ -1,8 +1,8 @@
 import { GoogleMap, InfoBox } from "@react-google-maps/api";
 import { useMemo } from "react";
-import { Paper, Typography, Rating } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
-const Map = ({ coordinates, onCenterChanged, onBoundsChanged, setMapRef, places }) => {
+const Map = ({ coordinates, onBoundsChanged, setMapRef, places }) => {
     // Map options and theme
     const options = useMemo(() => ({
         disableDefaultUI: true,
@@ -39,7 +39,6 @@ const Map = ({ coordinates, onCenterChanged, onBoundsChanged, setMapRef, places 
                             src={place.photo ? place.photo.images.large.url : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"}
                             alt={place.name}
                         />
-                        <Rating size="small" value={Number(place.rating)} readOnly />
                     </Paper>
                 </InfoBox>
             ))}
